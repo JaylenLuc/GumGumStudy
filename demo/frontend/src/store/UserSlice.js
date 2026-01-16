@@ -10,6 +10,10 @@ export const postUser = createAsyncThunk('users/postUsers', async (userData) => 
   const response = await axios.post('/users', userData);
   return response.data;
 });
+export const findUser = createAsyncThunk('users/findUsers', async (userData) => {
+  const response = await axios.get(`/users?name=${userData.name}`);
+  return response.data;
+});
 
 const userSlice = createSlice({
   name: 'users',
@@ -17,10 +21,12 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchUsers.fulfilled, (state, action) => {
       state.items = action.payload;
-      state.status = 'idle';
     });
     builder.addCase(postUser.fulfilled, (state, action) => {
       state.items.push(action.payload);
+    });
+    builder.addCase(findUser.fulfilled, (state, action) => {
+      state.items = action.payload;
     });
   },
   reducers: undefined

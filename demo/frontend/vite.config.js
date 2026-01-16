@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/users': {
-        target: 'https://localhost:8080',
+        target: 'https://urban-carnival-49r495q95v5h747w-8080.app.github.dev',
         changeOrigin: true,
         secure: false,
       }
